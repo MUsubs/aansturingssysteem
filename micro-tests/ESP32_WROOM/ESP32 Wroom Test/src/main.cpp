@@ -1,18 +1,39 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+int fib(int n)
+{
+    if (n <= 1)
+    {
+        return n;
+    }
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    return fib(n - 1) + fib(n - 2);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void setup()
+{
+    Serial.begin(115200);
+
+    int res = fib(10);
+    Serial.println(res);
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void loop()
+{
+    delay(5000);
+    // Serial.println("Hello, world!");
 }
+
+// ---- TESTOPSTELLING TODO ----
+
+// TODO Wat komt er aan de chip te hangen?
+// TODO Bereken de stroom die door de chip loopt tijdens aansturen en/of zware berekeningen.
+// TODO Kijk of de chip het allemaal aankan.
+
+
+
+// Wat komt er aan de chip te hangen?:
+// 1. Grond (GND)
+// 2. Voeding (Batterij) (VCC)
+// 4. Afstandsensor?
+// 5. 3 Actuatoren (6 draden totaal)
