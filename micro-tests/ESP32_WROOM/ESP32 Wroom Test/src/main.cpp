@@ -15,13 +15,25 @@ void setup()
     Serial.begin(115200);
 
     int res = fib(10);
+    // printf("fib(10) = %d\n", res);
     Serial.println(res);
 }
 
 void loop()
 {
     delay(5000);
-    // Serial.println("Hello, world!");
+    // printf("Hello, world!\n");
+    Serial.println("Hello, world!");
+}
+
+int main(int argc, char **argv)
+{
+    setup();
+    while (true) 
+    {
+        loop();
+    }
+    return 0;
 }
 
 // ---- TESTOPSTELLING TODO ----
