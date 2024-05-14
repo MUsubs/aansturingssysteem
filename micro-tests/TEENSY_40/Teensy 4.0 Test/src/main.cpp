@@ -47,7 +47,6 @@ void loop() {
 }
 
 
-
 // Test function for demo.
 void touchTest() {
 //All motors on if touch switch on.
