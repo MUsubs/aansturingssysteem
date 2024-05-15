@@ -1,5 +1,11 @@
 #include <Arduino.h>
 
+// TODO: 
+// 1. lastige berekening (fibonacci, prime, etc.)
+// 2. sensor uitlezen (afstand)
+// 3. sensor aansturen (ledje)
+// 4. motor aansturen (stappenmotor)
+
 // declare pin numbers:
 int pin_driver_eep = 22;
 
