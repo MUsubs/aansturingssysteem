@@ -1,10 +1,22 @@
 #include <Arduino.h>
 
-// TODO: 
-// 1. lastige berekening (fibonacci, prime, etc.)
-// 2. sensor uitlezen (afstand)
-// 3. sensor aansturen (ledje)
-// 4. motor aansturen (stappenmotor)
+
+#include <Arduino.h>
+
+static void threadFib( int n ){
+
+  // setup
+  Serial.begin( 115200 );
+
+  // loop
+  while (1) {
+    unsigned long time = measureTime( n );
+    Serial.print( "Fibonacci in ");
+    Serial.print( time );
+    Serial.println( "microseconds." );
+  }
+}
+
 
 float fibonacci( int n ) {
   if ( n <= 1 ) {

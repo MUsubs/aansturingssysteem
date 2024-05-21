@@ -1,31 +1,26 @@
 #include <Arduino.h>
 
-// TODO: 
-// 1. lastige berekening (fibonacci, prime, etc.)
-// 2. sensor uitlezen (afstand)
-// 3. sensor aansturen (ledje)
-// 4. motor aansturen (stappenmotor)
+static void threadDistance( const uint8_t trig_pin, const uint8_t echo_pin){
 
-void setup() {
-  pinMode(trigPin, OUTPUT); // Set trigger pin as output
-  pinMode(echoPin, INPUT);  // Set echo pin as input
-}
+  // setup
+  Serial.begin(115200);
+  pinMode( trig_pin, OUTPUT ); // Set trigger pin as output
+  pinMode( echo_pin, INPUT );  // Set echo pin as input
 
+  // loop
+  while (1) {
+    // Trigger a sound wave
+    digitalWrite( trig_pin, LOW );
+    delayMicroseconds( 2 );
+    digitalWrite( trig_pin, HIGH );
+    delayMicroseconds( 10 );
+    digitalWrite( trig_pin, LOW );
 
-void loop() {
-  // Trigger a sound wave
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+    // Measure echo time
+    uint32_t duration = pulseIn( echo_pin, HIGH );
 
-  // Measure echo time
-  duration = pulseIn(echoPin, HIGH);
-
-  // Calculate distance (speed of sound * time / 2)
-  distance = duration * 0.034 / 2; // Adjust factor for speed of sound in your units
-
-  // Display or store the distance measurement
-  // ...
+    // Calculate distance (speed of sound * time / 2)
+    uint32_t distance = duration * 0.034 / 2; // Adjust factor for speed of sound in your units
+    Serial.println(distance);
+  }
 }

@@ -6,8 +6,17 @@
 // 3. sensor aansturen (ledje)
 // 4. motor aansturen (stappenmotor)
 
-void blinkLight( int pin, int duration ) {
-  digitalWrite( pin, HIGH );
-  delay( duration );
-  digitalWrite( pin, LOW );
+static void threadLight( int led_pin, int duration ){
+  
+  // setup: 
+  pinMode( led_pin, OUTPUT );
+  
+  //loop
+  while ( 1 ) {
+    digitalWrite( led_pin, HIGH );
+    delay( duration );
+    digitalWrite( led_pin, LOW );
+    delay( duration );
+  }
+
 }

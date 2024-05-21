@@ -1,30 +1,7 @@
 #include <Arduino.h>
 
-// TODO: 
-// 1. lastige berekening (fibonacci, prime, etc.)
-// 2. sensor uitlezen (afstand)
-// 3. sensor aansturen (ledje)
-// 4. motor aansturen (stappenmotor)
-
-// declare pin numbers:
-int pin_driver_eep = 22;
-
-int pin_fwd1 = 21;
-int pin_fwd2 = 20;
-
-int pin_height1 = 19;
-int pin_height2 = 18;
-
-int pin_steer1 = 4;
-int pin_steer2 = 5;
-
-int pin_touch = 8;
-
-void touchTest();
-bool on = false;
-
-
-void setup() {
+static void threadMotor( const uint8_t pin_driver_eep, const uint8_t pin_fwd1, const uint8_t pin_fwd2,
+  const uint8_t pin_height1, const uint8_t pin_height2, const uint8_t pin_steer1, const uint8_t pin_steer2, const uint8_t pin_touch ) {
   // Set up serial and pins:
   Serial.begin(115200);
   pinMode( pin_driver_eep, OUTPUT );
@@ -45,19 +22,20 @@ void setup() {
   digitalWrite( pin_steer1, LOW );
   digitalWrite( pin_steer2, LOW );
 
+  bool on = false;
+
   // Print start
   Serial.print( "start" );
 
-}
-
-void loop() {
-  touchTest();
-  delay(50);
+  while ( 1 ){
+    touchTest( on, pin_touch, pin_steer1, pin_height1, pin_fwd2 );
+    delay( 50 );
+  }
 }
 
 
 // Test function for demo.
-void touchTest() {
+void touchTest( bool& on, const uint8_t pin_touch, const uint8_t pin_steer1, const uint8_t pin_height1, const uint8_t pin_fwd2) {
 //All motors on if touch switch on.
   if ( digitalRead( pin_touch ) ) {
     if ( on ) {
