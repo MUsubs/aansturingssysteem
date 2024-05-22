@@ -3,7 +3,6 @@
 void threadDistance( const uint8_t trig_pin, const uint8_t echo_pin){
 
   // setup
-  Serial.begin(115200);
   pinMode( trig_pin, OUTPUT ); // Set trigger pin as output
   pinMode( echo_pin, INPUT );  // Set echo pin as input
 

@@ -5,13 +5,8 @@
 // Test function for demo.
 void touchTest( bool& on, const uint8_t pin_button, const uint8_t pin_steer1, const uint8_t pin_height1, const uint8_t pin_fwd2) {
 //All motors on if touch switch on.
-  Serial.println("akdjfla");
   if ( digitalRead( pin_button ) ) {
-    if ( on ) {
-      on = false;
-    } else if (!on) {
-      on = true;
-    }
+    on = !on;
   }
 
   if ( on ) {
@@ -28,10 +23,8 @@ void touchTest( bool& on, const uint8_t pin_button, const uint8_t pin_steer1, co
 
 
 void threadMotor( void* parameters ) {
-  Serial.printf("Whoopwhoopo creating thread\n");
   // Cast parameters to correct type
   uint8_t* pins = static_cast<uint8_t*>(parameters);
-  Serial.printf("Succesful interpretation of pins\n");
   const uint8_t pin_driver_eep = pins[0];
   const uint8_t pin_fwd1 = pins[1];
   const uint8_t pin_fwd2 = pins[2];
@@ -40,7 +33,6 @@ void threadMotor( void* parameters ) {
   const uint8_t pin_steer1 = pins[5];
   const uint8_t pin_steer2 = pins[6];
   const uint8_t pin_button = pins[7];
-  Serial.printf("Check for pin[0] = %d", pin_driver_eep);
 
   // Set up serial and pins:
   pinMode( pin_driver_eep, OUTPUT );
@@ -67,8 +59,7 @@ void threadMotor( void* parameters ) {
   Serial.println( "start" );
 
   for(;;){
-    // touchTest( on, pin_button, pin_steer1, pin_height1, pin_fwd2 );
-    Serial.println( "Je moeder\n");
-    vTaskDelay(50);
+    touchTest( on, pin_button, pin_steer1, pin_height1, pin_fwd2 );
+    delay( 50 );
   }
 }

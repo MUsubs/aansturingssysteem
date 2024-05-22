@@ -15,20 +15,6 @@
 // 2. sensor uitlezen (afstand)
 // 3. sensor aansturen (ledje)
 // 4. motor aansturen (motor)
-xTaskHandle thread_simple;
-
-void simple_task(void* pvParameters){  
-  //loop
-  while ( 1 ) {
-    digitalWrite( 13, HIGH );
-    vTaskDelay( 500 );
-    digitalWrite( 13, LOW );
-    vTaskDelay( 500 );
-  }
-}
-
-xTaskHandle thread_motor_handle;
-char c;
 void setup(){
 
     // led pin voor light
@@ -43,41 +29,11 @@ void setup(){
     static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
 
     Serial.begin(115200);
-    pinMode( 13, OUTPUT );
     
-    //threadMotor(pin_driver_eep, pin_fwd1, pin_fwd2, pin_height1, pin_height2, pin_steer1, pin_steer2, pin_button);
-    //threadFib(30);
-    //threadLight(led_pin, 50);
-    //threadDistance(trig_pin, echo_pin);
-
-    // xTaskCreate(threadDistance, "distance", 2000, NULL,   );
-    // xTaskCreate(threadFib, "fibonacci", 20000, NULL);
-    // xTaskCreate(threadLight, "light", 1000, NULL);
-
-    // threadMotor( (void*)motor_pins );
-    while (!Serial) {
-        ;
-    }
-    delay(2000);
-    // auto task_return = xTaskCreate( threadMotor, "MotorControl", 10000, (void*)&motor_pins, 1, &thread_motor_handle);
-    auto blep = xTaskCreate(simple_task, "Simple", 5000, (void*) 1, 1, &thread_simple);
-    Serial.println("Before task creating\n");
-    (blep == pdPASS) ? Serial.println("Blep yes\n") : Serial.println("Blep no\n");
-    // vTaskStartScheduler();
-    // if (task_return == pdPASS) {
-    //     c = 'Y';
-    // }
-    // else {
-    //     c = 'N';
-    // }
+    // threadMotor((void*)motor_pins);
+    // threadFib(30);
+    // threadLight(led_pin, 50);
+    // threadDistance(trig_pin, echo_pin);
 }
 
-void loop(){
-    // Serial.printf("Bonjour!\n");
-    // Serial.printf("%c", c);
-}
-
-
-// TO DO:
-// - start 4 threads.
-
+void loop(){}

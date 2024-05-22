@@ -17,8 +17,7 @@ float measureTime( int n ) {
 void threadFib( int n ){
 
   // setup
-  Serial.begin( 115200 );
-  Serial.println( "start." );
+  Serial.println( "start fib" );
 
   // loop
   while (1) {
