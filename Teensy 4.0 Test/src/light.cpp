@@ -1,12 +1,6 @@
-#include <Arduino.h>
+#include "light.hpp"
 
-// TODO: 
-// 1. lastige berekening (fibonacci, prime, etc.)
-// 2. sensor uitlezen (afstand)
-// 3. sensor aansturen (ledje)
-// 4. motor aansturen (stappenmotor)
-
-static void threadLight( int led_pin, int duration ){
+void threadLight( int led_pin, int duration ){
   
   // setup: 
   pinMode( led_pin, OUTPUT );

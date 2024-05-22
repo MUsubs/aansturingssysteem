@@ -1,6 +1,6 @@
-#include <Arduino.h>
+#include "distance.hpp"
 
-static void threadDistance( const uint8_t trig_pin, const uint8_t echo_pin){
+void threadDistance( const uint8_t trig_pin, const uint8_t echo_pin){
 
   // setup
   Serial.begin(115200);
