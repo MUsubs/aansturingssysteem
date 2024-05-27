@@ -18,14 +18,28 @@
 xTaskHandle thread_simple;
 
 void simple_task(void* pvParameters){  
-  //loop
-  while ( 1 ) {
-    digitalWrite( 13, HIGH );
-    vTaskDelay( 500 );
-    digitalWrite( 13, LOW );
-    vTaskDelay( 500 );
+    //loop
+    configASSERT( ( ( uint32_t ) pvParameters ) == 1 );
+    for(;;) {
+        digitalWrite( 13, HIGH );
+        vTaskDelay( 500 );
+        digitalWrite( 13, LOW );
+        vTaskDelay( 500 );
   }
 }
+
+xTaskHandle thread_talk;
+
+void talking_task(void* pvParameters){
+    configASSERT( ( ( uint32_t ) pvParameters ) == 1);
+
+    for(;;){
+        Serial.println( "here" );
+        vTaskDelay( 1000 );
+    }
+}
+
+
 
 xTaskHandle thread_motor_handle;
 char c;
@@ -33,14 +47,14 @@ void setup(){
 
     // led pin voor light
     // on board led
-    const uint8_t led_pin = 13;
+    // const uint8_t led_pin = 13;
 
-    // afstandssensor pinnen voor distance
-    const uint8_t echo_pin = 14;
-    const uint8_t trig_pin = 15;
+    // // afstandssensor pinnen voor distance
+    // const uint8_t echo_pin = 14;
+    // const uint8_t trig_pin = 15;
 
-    // motor(driver) pins voor motor
-    static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
+    // // motor(driver) pins voor motor
+    // static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
 
     Serial.begin(115200);
     pinMode( 13, OUTPUT );
@@ -60,10 +74,16 @@ void setup(){
     }
     delay(2000);
     // auto task_return = xTaskCreate( threadMotor, "MotorControl", 10000, (void*)&motor_pins, 1, &thread_motor_handle);
-    auto blep = xTaskCreate(simple_task, "Simple", 5000, (void*) 1, 1, &thread_simple);
     Serial.println("Before task creating\n");
-    (blep == pdPASS) ? Serial.println("Blep yes\n") : Serial.println("Blep no\n");
+    auto blep = xTaskCreate(simple_task, "Simple", 5000, (void*) 1, 1, &thread_simple);
+    auto blop = xTaskCreate(talking_task, "Talk", 5000, (void*) 1, 1, &thread_talk);
     // vTaskStartScheduler();
+    if (blep == pdPASS) {
+        vTaskDelete(thread_simple);
+        Serial.println("Blep yes\n");
+    }else{
+         Serial.println("Blep no\n");
+    }
     // if (task_return == pdPASS) {
     //     c = 'Y';
     // }
