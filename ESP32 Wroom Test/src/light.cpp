@@ -1,4 +1,4 @@
-#pragma once
+#include "light.hpp"
 
 void threadLight( int led_pin, int duration ){
   

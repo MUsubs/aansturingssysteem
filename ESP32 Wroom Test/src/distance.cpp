@@ -1,4 +1,4 @@
-#pragma once
+#include "distance.hpp"
 
 void threadDistance( const uint8_t trig_pin, const uint8_t echo_pin){
 

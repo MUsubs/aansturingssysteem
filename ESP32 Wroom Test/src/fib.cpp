@@ -1,4 +1,4 @@
-#pragma once
+#include "fib.hpp"
 
 float fibonacci( int n ) {
   if ( n <= 1 ) {
