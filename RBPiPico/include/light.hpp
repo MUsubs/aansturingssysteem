@@ -1,8 +1,5 @@
-#ifndef LIGHT_HPP
-#define LIGHT_HPP
+#pragma once
 
 #include <Arduino.h>
 
-void threadLight( int led_pin, int duration );
-
-#endif //LIGHT_HPP
+void threadLight(int led_pin, int duration);
