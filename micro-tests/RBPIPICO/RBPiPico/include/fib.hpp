@@ -1,12 +1,9 @@
-#ifndef FIB_HPP
-#define FIB_HPP
+#pragma once
 
 #include <Arduino.h>
 
-float fibonacci( int n );
+float fibonacci(int n);
 
-float measureTime( int n );
+float measureTime(int n);
 
-void threadFib( int n );
-
-#endif //FIB_HPP
+void threadFib(int n);
