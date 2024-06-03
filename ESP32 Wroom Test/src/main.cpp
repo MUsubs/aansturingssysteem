@@ -25,13 +25,13 @@ void setup(){
     const uint8_t trig_pin = 15;
 
     // motor(driver) pins voor motor
-    static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
+    static uint8_t motor_pins[8] = { 22, 32, 20, 19, 18, 4, 5, 35 };
 
     Serial.begin(115200);
     
     // threadMotor((void*)motor_pins);
     // threadFib(30);
-    threadLight(led_pin, 50);
+    // threadLight(led_pin, 50);
     // threadDistance(trig_pin, echo_pin);
 }
 
