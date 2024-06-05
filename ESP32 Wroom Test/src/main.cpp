@@ -4,6 +4,7 @@
 #include "fib.hpp"
 #include "light.hpp"
 #include "motor.hpp"
+#include "memory.hpp"
 
 // PAS OP: geen pwm op pinnen 6, 7, 8, 9
 // bij gebruik van run-time stats (configGENERATE_RUN_TIME_STATS), verandert timer3
@@ -33,6 +34,7 @@ void setup(){
     // threadFib(30);
     // threadLight(led_pin, 50);
     // threadDistance(trig_pin, echo_pin);
+    // threadMemory();
 }
 
 void loop(){}
