@@ -1,18 +1,5 @@
 #include <Arduino.h>
 
-void test_memory_speed();
-
-void setup() {
-    Serial.begin(115200);
-    while (!Serial) {
-        ; // Wacht tot de seriële monitor is geopend
-    }
-    test_memory_speed();
-}
-
-void loop() {
-    // Niets te doen in de loop
-}
 
 void test_memory_speed() {
     const size_t test_size = 1024 * 1024;  // 1 MB
@@ -36,9 +23,9 @@ void test_memory_speed() {
     start_time = micros();
 
     // Memory read test
-    volatile uint8_t temp;
+    volatile uint8_t tmp;
     for (size_t i = 0; i < test_size; i++) {
-        temp = buffer[i];
+        tmp = buffer[i];
     }
 
     end_time = micros();

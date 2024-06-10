@@ -37,7 +37,9 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includePaths": [
+    "C:\\ICU\\20230608.2_ICU4C_MSVC_x64_Release\\icu-windows\\include"
+  ],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"

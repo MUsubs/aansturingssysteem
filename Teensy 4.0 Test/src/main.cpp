@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
-
+// #include "Memory test.cpp"
 #include "distance.hpp"
 #include "fib.hpp"
 #include "light.hpp"
@@ -19,19 +19,21 @@ void setup(){
 
     // led pin voor light
     // on board led
-    const uint8_t led_pin = 13;
+    // const uint8_t led_pin = 13;
 
-    // afstandssensor pinnen voor distance
-    const uint8_t echo_pin = 14;
-    const uint8_t trig_pin = 15;
+    // // afstandssensor pinnen voor distance
+    // const uint8_t echo_pin = 14;
+    // const uint8_t trig_pin = 15;
 
-    // motor(driver) pins voor motor
-    static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
+    // // motor(driver) pins voor motor
+    // static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 8 };
 
-    Serial.begin(115200);
-    
+    Serial.begin(9600);
+    Serial.print("hello?");
+    // Memory
+    // test_memory_speed();
     // threadMotor((void*)motor_pins);
-    // threadFib(30);
+    threadFib(30);
     // threadLight(led_pin, 50);
     // threadDistance(trig_pin, echo_pin);
 }
