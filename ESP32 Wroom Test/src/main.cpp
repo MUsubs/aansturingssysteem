@@ -30,8 +30,8 @@ void setup(){
 
     Serial.begin(115200);
     
-    threadMotor((void*)motor_pins);
-    // threadFib(30);
+    // threadMotor((void*)motor_pins);
+    threadFib(30);
     // threadLight(led_pin, 50);
     // threadDistance(trig_pin, echo_pin);
     // threadMemory();

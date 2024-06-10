@@ -25,5 +25,9 @@ void threadFib( int n ){
     Serial.print( "Fibonacci in ");
     Serial.print( time );
     Serial.println( " microseconds." );
+    float temperature = (float)temperatureRead();
+    Serial.print("Onboard temperature: ");
+    Serial.print(temperature);
+    Serial.println(" °C");
   }
 }
