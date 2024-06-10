@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "distance.hpp"
-#include "fib.hpp"
+#include"fib.hpp"
 #include "light.hpp"
 #include "motor.hpp"
 
@@ -18,16 +18,19 @@ void setup(){
 
     // led pin voor light
     // on board led
-    const uint8_t led_pin = 2;
+    // const uint8_t led_pin = 2;
 
-    // afstandssensor pinnen voor distance
-    const uint8_t echo_pin = 14;
-    const uint8_t trig_pin = 15;
+    // // afstandssensor pinnen voor distance
+    // const uint8_t echo_pin = 14;
+    // const uint8_t trig_pin = 15;
 
     // motor(driver) pins voor motor
-    static uint8_t motor_pins[8] = { 22, 32, 20, 19, 18, 4, 5, 35 };
+    static uint8_t motor_pins[8] = { 22, 21, 20, 19, 18, 4, 5, 17 };
 
     Serial.begin(115200);
+    adc_init();
+    adc_set_temp_sensor_enabled (true);
+    adc_select_input(4);
     
     // threadMotor((void*)motor_pins);
     threadFib(30);

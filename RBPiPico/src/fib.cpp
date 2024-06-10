@@ -29,5 +29,14 @@ void threadFib(int n)
         Serial.print("Fibonacci in ");
         Serial.print(time);
         Serial.println(" microseconds.");
+
+        uint16_t adc = adc_read();
+        float ADC_Voltage = float(adc) * (3.3f / (1 << 12));
+        float temp = 27 - (ADC_Voltage - 0.706)/0.001721;
+
+        // read temperature
+        Serial.print("Temperature: ");
+        Serial.println(temp);
+
     }
 }

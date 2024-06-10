@@ -3,13 +3,20 @@
 // Test function for demo.
 void touchTest(bool &on, const uint8_t pin_button, const uint8_t pin_steer1, const uint8_t pin_height1, const uint8_t pin_fwd2)
 {
-    // All motors on if touch switch on.
-    on = !on ? digitalRead(pin_button) : on;
-    PinStatus status = on ? HIGH : LOW;
+   if ( digitalRead( pin_button ) ) {
+    on = !on;
+  }
 
-    digitalWrite(pin_steer1, status);
-    digitalWrite(pin_height1, status);
-    digitalWrite(pin_fwd2, status);
+  if ( on ) {
+    digitalWrite( pin_steer1, HIGH );
+    digitalWrite( pin_height1, HIGH );
+    digitalWrite( pin_fwd2, HIGH );
+  }
+  if ( !on ) {
+    digitalWrite( pin_steer1, LOW );
+    digitalWrite( pin_height1, LOW );
+    digitalWrite( pin_fwd2, LOW );
+  }
 }
 
 void threadMotor(void *parameters)
