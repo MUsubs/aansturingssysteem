@@ -31,11 +31,15 @@ void setup(){
     Serial.begin(9600);
     Serial.print("hello?");
     // Memory
+    threadFib(30);
     // test_memory_speed();
     // threadMotor((void*)motor_pins);
-    threadFib(30);
+    // threadFib(30);
     // threadLight(led_pin, 50);
     // threadDistance(trig_pin, echo_pin);
 }
 
-void loop(){}
+void loop(){
+    
+   
+}
