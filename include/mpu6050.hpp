@@ -4,28 +4,23 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include <MPU6050_light.h>
-#include <VarSpeedServo.h>
 #include "Kalman.h"
 
 class Mpu6050 {
 public:
-    Mpu6050( VarSpeedServo& my_servo, MPU6050& mpu, Kalman& kalmanFilter);
+    Mpu6050( MPU6050& mpu, Kalman& kalmanFilter);
     float PID();
-    float getServo_pos();
     float getSetpoint();
     void setSetpoint(float s);
     float highPassFilter(float current_value, float previous_value);
     void setGyroUp();
     float getCurrent_z();
-    void Move();
     void kalman();
-    float mean();
 
 private:
-    VarSpeedServo& my_servo;
     MPU6050& mpu;
     Kalman& kalmanFilter;
-    float servo_pos = 0.0;
+    float output = 0;
     float pos_prev = 0;
     float previous_z = 0.0;
     const float alpha = 0.8;

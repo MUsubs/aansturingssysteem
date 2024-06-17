@@ -1,7 +1,6 @@
 #include "directions.hpp"
 
-
-void threadMotor( void *parameters ) {
+void motorSetup( void *parameters ) {
     // Cast parameters to correct type
     uint8_t *pins = static_cast<uint8_t *>( parameters );
     const uint8_t pin_driver_eep = pins[0];
@@ -32,32 +31,8 @@ void threadMotor( void *parameters ) {
     digitalWrite( pin_steer1, LOW );
     digitalWrite( pin_steer2, LOW );
 
-    bool on = false;
-    bool lastButtonState = LOW; // Initial button state
-
     // Print start
     Serial.println("start");
-
-    while (true) { // Loop to keep the thread running
-        bool buttonState = digitalRead(pin_button);
-
-        // Debounce the button
-        if (buttonState != lastButtonState) {
-            delay(50); // Delay for debouncing
-            if (buttonState == HIGH) {
-                on = !on; // Toggle state
-            }
-        }
-        lastButtonState = buttonState;
-
-        if (on) {
-            forwardDirection(pins);
-        } else {
-            off(pins);
-        }
-
-        delay(50); // Loop delay to manage CPU usage
-    }
 }
 
 void leftDirection( uint8_t *pins ) {
