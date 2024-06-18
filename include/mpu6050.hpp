@@ -1,18 +1,19 @@
 #ifndef R2D2_MPU6050_HPP
 #define R2D2_MPU6050_HPP
 
-#include "Arduino.h"
-#include "Wire.h"
 #include <MPU6050_light.h>
+
+#include "Arduino.h"
 #include "Kalman.h"
+#include "Wire.h"
 
 class Mpu6050 {
 public:
-    Mpu6050( MPU6050& mpu, Kalman& kalmanFilter);
+    Mpu6050( MPU6050& mpu, Kalman& kalmanFilter );
     float PID();
     float getSetpoint();
-    void setSetpoint(float s);
-    float highPassFilter(float current_value, float previous_value);
+    void setSetpoint( float s );
+    float highPassFilter( float current_value, float previous_value );
     void setGyroUp();
     float getCurrent_z();
     void kalman();
@@ -39,4 +40,4 @@ private:
     int int_count = 0;
 };
 
-#endif //R2D2_MPU6050_HPP
+#endif  // R2D2_MPU6050_HPP
