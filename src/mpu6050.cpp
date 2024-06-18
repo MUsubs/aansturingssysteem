@@ -1,5 +1,7 @@
 #include "mpu6050.hpp"
 
+namespace asn{
+
 Mpu6050::Mpu6050( MPU6050& mpu, Kalman& kalmanFilter ) :
     mpu( mpu ), kalmanFilter( kalmanFilter ) {
 }
@@ -58,3 +60,5 @@ void Mpu6050::kalman() {
 
     prevTime = currentTime;
 }
+
+};

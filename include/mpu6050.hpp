@@ -7,6 +7,8 @@
 #include "Kalman.h"
 #include "Wire.h"
 
+namespace asn{
+
 class Mpu6050 {
 public:
     Mpu6050( MPU6050& mpu, Kalman& kalmanFilter );
@@ -38,6 +40,8 @@ private:
     float prevTime = 0;
     float filteredAngle = 0;
     int int_count = 0;
+};
+
 };
 
 #endif  // R2D2_MPU6050_HPP
