@@ -42,6 +42,6 @@ private:
     int int_count = 0;
 };
 
-};
+}; //namespace asn
 
 #endif  // R2D2_MPU6050_HPP
