@@ -24,32 +24,32 @@ void loop(){
     Serial.print("graden: " + String(round(gyro.getCurrent_z())));
     if(round(gyro.getCurrent_z()) < gyro.getSetpoint()){
         Serial.println(" left ");
-        motor.leftDirection();
+        motor.setMotor(motor.steer, true, true);
         delay(50);
     }
     else if(round(gyro.getCurrent_z()) > gyro.getSetpoint()){
         Serial.println(" right ");
-        motor.rightDirection();
+        motor.setMotor(motor.steer, true, false);
         delay(50);
     }
     if (digitalRead(button_pins[0]) == HIGH){
-        motor.forwardDirection();
+        motor.setMotor(motor.speed, true, true);
         delay(50);
-        motor.off();
+        motor.setMotor(motor.speed, false, true);
     }
     if (digitalRead(button_pins[1]) == HIGH){
-        motor.backwardDirection();
+        motor.setMotor(motor.speed, true, false);
         delay(50);
-        motor.off();
+        motor.setMotor(motor.speed, false, false);
     }
     if (digitalRead(button_pins[2]) == HIGH){
-        motor.upDirection();
+        motor.setMotor(motor.depth, true, true);
         delay(50);
-        motor.off();
+        motor.setMotor(motor.depth, false, true);
     }
     if (digitalRead(button_pins[3]) == HIGH){
-        motor.downDirection();
+        motor.setMotor(motor.depth, true, false);
         delay(50);
-        motor.off();
+        motor.setMotor(motor.depth, false, false);
     }
 }
