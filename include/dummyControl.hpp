@@ -12,7 +12,7 @@ public:
     void main();
 
 private:
-    MotorControl motorControl;
+    MotorControl& motorControl;
 };
 
 }  // namespace asn
