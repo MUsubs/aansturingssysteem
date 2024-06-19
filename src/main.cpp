@@ -3,6 +3,7 @@
 #include "motor.hpp"
 #include "motor_control.hpp"
 #include "mpu6050.hpp"
+#include "dummyControl.hpp"
 
 #include <FreeRTOS.h>
 
@@ -11,6 +12,7 @@ using namespace asn;
 static uint8_t motor_pins[7] = { 22, 21, 20, 19, 18, 12, 13 };
 static uint8_t button_pins[4] = { 16, 17, 26, 27 };
 MotorControl motorControl( motor_pins );
+DummyControl dummyControl( motorControl );
 MPU6050 mpu( Wire );
 Kalman kalmanFilter;
 Mpu6050 gyro( mpu, kalmanFilter );
