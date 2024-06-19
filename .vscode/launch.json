@@ -33,7 +33,7 @@
             "name": "PIO Debug",
             "executable": "C:/Users/Felix/Documents/Felix/HBO-ICT/Jaar-2/R2D2/aansturingssysteem/.pio/build/pico/firmware.elf",
             "projectEnvName": "pico",
-            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-rp2040-earlephilhower/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "C:/Users/Felix/.platformio/platforms/raspberrypi/misc/svd/rp2040.svd",
             "preLaunchTask": {
@@ -47,7 +47,7 @@
             "name": "PIO Debug (skip Pre-Debug)",
             "executable": "C:/Users/Felix/Documents/Felix/HBO-ICT/Jaar-2/R2D2/aansturingssysteem/.pio/build/pico/firmware.elf",
             "projectEnvName": "pico",
-            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-rp2040-earlephilhower/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "C:/Users/Felix/.platformio/platforms/raspberrypi/misc/svd/rp2040.svd"
         },
@@ -57,7 +57,7 @@
             "name": "PIO Debug (without uploading)",
             "executable": "C:/Users/Felix/Documents/Felix/HBO-ICT/Jaar-2/R2D2/aansturingssysteem/.pio/build/pico/firmware.elf",
             "projectEnvName": "pico",
-            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "toolchainBinDir": "C:/Users/Felix/.platformio/packages/toolchain-rp2040-earlephilhower/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "C:/Users/Felix/.platformio/platforms/raspberrypi/misc/svd/rp2040.svd",
             "loadMode": "manual"

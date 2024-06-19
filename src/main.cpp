@@ -4,6 +4,8 @@
 #include "motor_control.hpp"
 #include "mpu6050.hpp"
 
+#include <FreeRTOS.h>
+
 using namespace asn;
 
 static uint8_t motor_pins[7] = { 22, 21, 20, 19, 18, 12, 13 };
@@ -17,9 +19,6 @@ void setup() {
     Wire.begin();
     gyro.setGyroUp();
     Serial.begin( 115200 );
-    adc_init();
-    adc_set_temp_sensor_enabled( true );
-    adc_select_input( 4 );
 }
 
 void loop() {

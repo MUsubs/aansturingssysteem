@@ -2,6 +2,8 @@
 #define R2D2_MOTOR_CONTROL_HPP
 
 #include <Arduino.h>
+#include "FreeRTOS.h"
+#include "queue.h"
 
 #include "motor.hpp"
 
@@ -26,6 +28,11 @@ public:
      * @brief enum with directions to use: LEFT, RIGHT, FORWARD, BACKWARD, UP, DOWN, STOP
      */
     enum direction_t { LEFT, RIGHT, FORWARD, BACKWARD, UP, DOWN, STOP };
+    
+    /**
+     * @brief Adds direction to queue
+     */
+    void move( direction_t direction );
 
     /**
      * @brief Turns on motor according to the given direction.
@@ -33,10 +40,11 @@ public:
      * @param direction (direction_t) to indicate in which direction to move.
      * 
      */
-    void move( direction_t direction );
+    void main();
 
 private:
     Motor motor;
+    xQueueHandle directions_queue;
 };
 
 }  // namespace asn
