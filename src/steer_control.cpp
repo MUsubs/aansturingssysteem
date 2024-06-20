@@ -2,23 +2,22 @@
 
 namespace asn {
 
-SteerControl::SteerControl( Mpu6050 &mpu, MotorControl &motorControl ) :
-    mpu( mpu ), motorControl( motorControl ) {
+SteerControl::SteerControl( Mpu6050 &mpu, MotorControl &motorControl, Kalman &kalmanFilter ) :
+    mpu( mpu ), motorControl( motorControl ), kalmanFilter( kalmanFilter ) {
 }
-
 
 void SteerControl::setSetpoint( float s ) {
     setpoint = s;
 }
 
-float SteerControl::highPassFilter( float current_value,
-                                    float previous_value ) {
+float SteerControl::highPassFilter( float current_value, float previous_value ) {
     return alpha * ( previous_value + current_value - alpha * previous_value );
 }
 
 void SteerControl::PID() {
     float gyro_z = mpu.getCurrent_z();
     float current_z = highPassFilter( gyro_z, previous_z );
+    kalman();
 
     error = setpoint - current_z;
     error_sum += error * dt;
@@ -33,19 +32,34 @@ void SteerControl::PID() {
         Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
         vTaskDelay( 50 );
+
     } else if ( round( mpu.getCurrent_z() ) > steer_action ) {
         Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
         vTaskDelay( 50 );
-    } else if ( round( mpu.getCurrent_z() ) == steer_action ) {
-        Serial.println( "DONE" );
-        // motorControl.move( motorControl.direction_t::FORWARD );
-        vTaskDelay( 50 );
     }
 }
 
+void SteerControl::kalman() {
+    currentTime = millis();
+
+    steer_action =
+        kalmanFilter.getAngle( mpu.getCurrent_z(), mpu.getAcc_z(), ( currentTime - prevTime ) / 1000 );
+
+    prevTime = currentTime;
+}
+
+void SteerControl::setUpSteerControl() {
+    mpu.setUpGyro();
+    kalmanFilter.setAngle( 0.0f );
+    kalmanFilter.setQangle( 0.001f );
+    kalmanFilter.setQbias( 0.0067f );
+    kalmanFilter.setRmeasure( 0.075f );
+    prevTime = millis();
+}
+
 void SteerControl::main() {
-    Serial.println( "SteerControl main" );
+    Serial.println( "start steer" );
     for ( ;; ) {
         PID();
     }
