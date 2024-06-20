@@ -14,7 +14,8 @@ public:
     void calculateRotation(const float cur_x, const float cur_z);
     void stop();
     void newDest();
-    void updateCurPos();
+    void updateCurPos(const float cur_x, const float cur_z);
+    void main();
 
 private:
     MotorControl &motorControl;

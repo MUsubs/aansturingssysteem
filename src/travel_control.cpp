@@ -24,7 +24,14 @@ void TravelControl::stop() {
 void TravelControl::newDest() {
 }
 
-void TravelControl::updateCurPos() {
+void TravelControl::updateCurPos(const float cur_x, const float cur_z) {
+    calculateRotation( cur_x, cur_z );
+    prev_x = cur_x;
+    prev_z = cur_z;
+    // iets met flags want draai
+}
+
+void TravelControl::main() {
 }
 
 }  // namespace asn

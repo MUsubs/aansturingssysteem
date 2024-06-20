@@ -6,6 +6,7 @@ SteerControl::SteerControl( Mpu6050 &mpu, MotorControl &motorControl ) :
     mpu( mpu ), motorControl( motorControl ) {
 }
 
+
 void SteerControl::setSetpoint( float s ) {
     setpoint = s;
 }
@@ -29,11 +30,24 @@ void SteerControl::PID() {
     previous_z = current_z;
 
     if ( round( mpu.getCurrent_z() ) < steer_action ) {
+        Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
-        delay( 50 );
+        vTaskDelay( 50 );
     } else if ( round( mpu.getCurrent_z() ) > steer_action ) {
+        Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
-        delay( 50 );
+        vTaskDelay( 50 );
+    } else if ( round( mpu.getCurrent_z() ) == steer_action ) {
+        Serial.println( "DONE" );
+        // motorControl.move( motorControl.direction_t::FORWARD );
+        vTaskDelay( 50 );
+    }
+}
+
+void SteerControl::main() {
+    Serial.println( "SteerControl main" );
+    for ( ;; ) {
+        PID();
     }
 }
 

@@ -12,43 +12,43 @@ void MotorControl::move( direction_t direction ) {
 }
 
 void MotorControl::main() {
-    // Serial.println( "start motor" );
+    Serial.println( "start motor" );
     direction_t direction;
     for ( ;; ) {
         if ( xQueueReceive( directions_queue, (void*)&direction, 0) ) {
             switch ( direction ) {
                 case LEFT:
-                    // Serial.println( "links" );
+                    Serial.println( "links" );
                     motor.setMotor( motor.steer, true, true );
                     break;
                 case RIGHT:
-                    // Serial.println( "rechts" );
+                    Serial.println( "rechts" );
                     motor.setMotor( motor.steer, true, false );
                     break;
                 case FORWARD:
-                    // Serial.println( "voren" );
+                    Serial.println( "voren" );
                     motor.setMotor( motor.speed, true, true );
                     break;
                 case BACKWARD:
-                    // Serial.println( "achter" );
+                    Serial.println( "achter" );
                     motor.setMotor( motor.speed, true, false );
                     break;
                 case UP:
-                    // Serial.println("boven");
+                    Serial.println("boven");
                     motor.setMotor( motor.depth, true, true );
                     break;
                 case DOWN:
-                    // Serial.println( "beneden");
+                    Serial.println( "beneden");
                     motor.setMotor( motor.depth, true, false );
                     break;
                 case STOP:
-                    // Serial.println( "STOP" );
+                    Serial.println( "STOP" );
                     motor.setMotor( motor.steer, false, false );
                     motor.setMotor( motor.speed, false, false );
                     motor.setMotor( motor.depth, false, false );
                     break;
                 default:
-                    // Serial.println("aaaaaaaa");
+                    Serial.println("aaaaaaaa");
                     break;
             }
         }

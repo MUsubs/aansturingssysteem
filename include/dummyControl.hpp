@@ -2,17 +2,17 @@
 #define R2D2_DUMMY_CONTROL_HPP
 
 #include <Arduino.h>
-#include "motor_control.hpp"
+#include "travel_control.hpp"
 
 namespace asn {
 
 class DummyControl {
 public:
-    DummyControl( MotorControl& motorControl );
+    DummyControl( TravelControl& travelControl );
     void main();
 
 private:
-    MotorControl& motorControl;
+    TravelControl& travelControl;
 };
 
 }  // namespace asn

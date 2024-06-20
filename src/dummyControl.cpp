@@ -2,36 +2,15 @@
 
 namespace asn {
 
-DummyControl::DummyControl( MotorControl& motorControl ) : motorControl( motorControl ){
+DummyControl::DummyControl( TravelControl& travelControl ) :
+    travelControl( travelControl ) {
 }
 
 void DummyControl::main() {
-    // Serial.println("start dummy");
+    Serial.println("start dummy");
     for(;;){
-        motorControl.move( MotorControl::direction_t::FORWARD );
-        vTaskDelay(1000);
-        motorControl.move( MotorControl::direction_t::STOP );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::BACKWARD );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::STOP );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::LEFT );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::STOP );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::RIGHT );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::STOP );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::UP );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::STOP);
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::DOWN );
-        vTaskDelay( 1000 );
-        motorControl.move( MotorControl::direction_t::STOP );
-        vTaskDelay( 1000 );
+        // Serial.println("start cycle");
+        travelControl.updateCurPos( 0.26, 0.99 );
         // Serial.println("end cycle");
     }
 }
