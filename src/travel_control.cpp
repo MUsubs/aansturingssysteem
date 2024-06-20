@@ -14,9 +14,8 @@ void TravelControl::calculateRotation( const float cur_x, const float cur_z ) {
     angle = angle * ( 180 / ( atan( 1 ) * 4 ) );
     if ( angle < 3 or angle > 357 ) {
         motorControl.move( motorControl.direction_t::FORWARD );
-    } else {
-        steerControl.setSetpoint( angle );
     }
+    steerControl.setSetpoint( angle );
     Serial.printf( "Finished calculateRotation, result = %f\n", angle );
 }
 

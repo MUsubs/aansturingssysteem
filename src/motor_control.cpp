@@ -18,11 +18,11 @@ void MotorControl::main() {
         if ( xQueueReceive( directions_queue, (void*)&direction, 0) ) {
             switch ( direction ) {
                 case LEFT:
-                    Serial.println( "links" );
+                    // Serial.println( "links" );
                     motor.setMotor( motor.steer, true, true );
                     break;
                 case RIGHT:
-                    Serial.println( "rechts" );
+                    // Serial.println( "rechts" );
                     motor.setMotor( motor.steer, true, false );
                     break;
                 case FORWARD:

@@ -29,12 +29,12 @@ void SteerControl::PID() {
     previous_z = current_z;
 
     if ( round( mpu.getCurrent_z() ) < steer_action ) {
-        Serial.println( "LEFT" );
+        // Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
         vTaskDelay( 50 );
 
     } else if ( round( mpu.getCurrent_z() ) > steer_action ) {
-        Serial.println( "RIGHT" );
+        // Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
         vTaskDelay( 50 );
     }

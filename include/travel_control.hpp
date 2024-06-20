@@ -34,12 +34,12 @@ public:
 private:
     MotorControl &motorControl;
     SteerControl &steerControl;
-    float dest_x = 0.64;
+    float dest_x = 1.0;
     float dest_y;
-    float dest_z = 0.12;
-    float prev_x = 0.23;
+    float dest_z = 1.0;
+    float prev_x = 0.0;
     float prev_y;
-    float prev_z = 0.99;
+    float prev_z = 0.0;
     float goal_direction;
 };
 
