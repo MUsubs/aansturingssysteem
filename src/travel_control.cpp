@@ -32,12 +32,13 @@ void TravelControl::newDest( const float newdest_x, const float newdest_y, const
 }
 
 void TravelControl::updateCurPos( const float cur_x, const float cur_y, const float cur_z ) {
-    calculateRotation( cur_x, cur_z );
     if ( prev_x == cur_x && prev_z == cur_z ) {
         motorControl.move( motorControl.direction_t::BACKWARD );
         vTaskDelay( 100 );
         motorControl.move( motorControl.direction_t::STOP );
-    } if ( dest_x == cur_x && dest_z == cur_z ) {
+    } 
+    
+    if ( dest_x == cur_x && dest_z == cur_z ) {
         steerControl.stop = true;
         if ( cur_y < dest_y ) {
             motorControl.move( motorControl.direction_t::UP );
@@ -46,7 +47,10 @@ void TravelControl::updateCurPos( const float cur_x, const float cur_y, const fl
         } else {
             motorControl.move( motorControl.direction_t::STOP );
         }
+    } else {
+        steerControl.stop = false;
     }
+    calculateRotation( cur_x, cur_z );
 }
 
 void TravelControl::main() {
