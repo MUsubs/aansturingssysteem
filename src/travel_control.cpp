@@ -33,9 +33,12 @@ void TravelControl::newDest( const float newdest_x, const float newdest_y, const
 
 void TravelControl::updateCurPos( const float cur_x, const float cur_y, const float cur_z ) {
     if ( prev_x == cur_x && prev_z == cur_z ) {
+        //stop steering when going backwards.
+        steerControl.stop = true;
         motorControl.move( motorControl.direction_t::BACKWARD );
         vTaskDelay( 100 );
         motorControl.move( motorControl.direction_t::STOP );
+        steerControl.stop = false;
     } 
     
     if ( dest_x == cur_x && dest_z == cur_z ) {
@@ -51,6 +54,11 @@ void TravelControl::updateCurPos( const float cur_x, const float cur_y, const fl
         steerControl.stop = false;
     }
     calculateRotation( cur_x, cur_z );
+
+    // update prev
+    prev_x = cur_x;
+    prev_y = cur_y;
+    prev_z = cur_z;
 }
 
 void TravelControl::main() {
