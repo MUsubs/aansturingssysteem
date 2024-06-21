@@ -3,7 +3,7 @@
 namespace asn {
 
 SteerControl::SteerControl( Mpu6050 &mpu, MotorControl &motorControl, Kalman &kalmanFilter ) :
-    mpu( mpu ), motorControl( motorControl ), kalmanFilter( kalmanFilter ) {
+    mpu( mpu ), motorControl( motorControl ), kalmanFilter( kalmanFilter ), stop( true ){
 }
 
 void SteerControl::setSetpoint( float s ) {
@@ -27,17 +27,22 @@ void SteerControl::PID() {
 
     pos_prev = steer_action;
     previous_z = current_z;
+    Serial.printf( "Steer action: %f\n", steer_action );
 
-    if ( round( mpu.getCurrent_z() ) < steer_action ) {
+    if ( round( mpu.getCurrent_z() +5) < steer_action ) {
         // Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
-        vTaskDelay( 50 );
-
-    } else if ( round( mpu.getCurrent_z() ) > steer_action ) {
+        vTaskDelay( wait_time );
+    } else if ( round( mpu.getCurrent_z() -5) > steer_action ) {
         // Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
-        vTaskDelay( 50 );
+        vTaskDelay( wait_time );
+    } else {
+        // Serial.println( "FORWARD" );
+        motorControl.move( motorControl.direction_t::FORWARD );
+        vTaskDelay( wait_time );
     }
+    motorControl.move( motorControl.direction_t::STOP );
 }
 
 void SteerControl::kalman() {
@@ -61,7 +66,9 @@ void SteerControl::setUpSteerControl() {
 void SteerControl::main() {
     Serial.println( "start steer" );
     for ( ;; ) {
-        PID();
+        if ( !stop ) {
+            PID();
+        }
     }
 }
 
