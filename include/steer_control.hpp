@@ -29,7 +29,9 @@ namespace asn
          */
         void setUpSteerControl();
         void main();
-        bool stop;
+        
+        void disable();
+        void enable();
 
     private:
     /**
@@ -64,6 +66,8 @@ namespace asn
         unsigned long currentTime = 0;
         float prevTime = 0;
         const int wait_time = 50;
+
+        bool stop;
     };
 
 } // namespace asn

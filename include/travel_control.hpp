@@ -2,6 +2,7 @@
 #define R2D2_TRAVELCONTROL_HPP
 
 #include <cmath>
+#include <array>
 
 #include "motor_control.hpp"
 #include "steer_control.hpp"
@@ -34,13 +35,18 @@ public:
 private:
     MotorControl &motorControl;
     SteerControl &steerControl;
-    float dest_x = 1.0;
-    float dest_y;
-    float dest_z = 1.0;
-    float prev_x = 0.0;
-    float prev_y;
-    float prev_z = 0.0;
-    float goal_direction;
+    float dest_x = 0;
+    float dest_y = 0;
+    float dest_z = 0;
+    float prev_x = 0;
+    float prev_y = 0;
+    float prev_z = 0;
+
+    xQueueHandle new_dest_queue;
+    xQueueHandle cur_queue;
+    bool do_stop;
+
+    enum travel_state_t {read, stop_travel, update_current, new_destination };
 };
 
 }  // namespace asn

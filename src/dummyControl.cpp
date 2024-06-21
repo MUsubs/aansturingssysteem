@@ -7,13 +7,26 @@ DummyControl::DummyControl( TravelControl& travelControl ) : travelControl( trav
 
 void DummyControl::main() {
     Serial.println( "start dummy" );
-    travelControl.updateCurPos( 0, 0, 0 );
+    travelControl.updateCurPos( 0.1, 0.1, 0.1 );
+    vTaskDelay( 1000 );
     travelControl.newDest( 1.0, 1.0, 1.0 );
-    travelControl.updateCurPos( 0.5, 0.0, 0.0 );
     vTaskDelay( 1000 );
-    travelControl.updateCurPos( 1.0, 0.0, 1.0 );
-    vTaskDelay( 1000 );
-    travelControl.updateCurPos( 1.0, 1.0, 1.0 );
+    // travelControl.updateCurPos(0.5, 0.0, 0.0);
+    // vTaskDelay( 1000 );
+    // travelControl.updateCurPos( 0.5, 0.0, 0.0 );
+    // vTaskDelay ( 1000 );
+    // travelControl.updateCurPos( 0.5, 0.0, 0.3);
+    // vTaskDelay ( 1000 );
+    // travelControl.updateCurPos(1.0, 0.0, 1.0);
+    // vTaskDelay(1000);
+    // travelControl.updateCurPos(1.0, 1.0, 1.0);
+    // vTaskDelay(1000);
+    // travelControl.stop();
+
+    travelControl.updateCurPos( 0.4, 0.1, 0.5);
+    vTaskDelay( 1000);
+    travelControl.updateCurPos( 0.7, 0.1, 0.7);
+
 }
 
 }  // namespace asn

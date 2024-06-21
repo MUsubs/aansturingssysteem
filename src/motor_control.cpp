@@ -48,7 +48,7 @@ void MotorControl::main() {
                     motor.setMotor( motor.depth, false, false );
                     break;
                 default:
-                    Serial.println("aaaaaaaa");
+                    // Serial.println("aaaaaaaa");
                     break;
             }
         }

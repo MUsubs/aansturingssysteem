@@ -30,15 +30,15 @@ void SteerControl::PID() {
     Serial.printf( "Steer action: %f\n", steer_action );
 
     if ( round( mpu.getCurrent_z() +5) < steer_action ) {
-        // Serial.println( "LEFT" );
+        Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
         vTaskDelay( wait_time );
     } else if ( round( mpu.getCurrent_z() -5) > steer_action ) {
-        // Serial.println( "RIGHT" );
+        Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
         vTaskDelay( wait_time );
     } else {
-        // Serial.println( "FORWARD" );
+        Serial.println( "FORWARD" );
         motorControl.move( motorControl.direction_t::FORWARD );
         vTaskDelay( wait_time );
     }
@@ -68,8 +68,20 @@ void SteerControl::main() {
     for ( ;; ) {
         if ( !stop ) {
             PID();
+        } else {
+            vTaskDelay(2);
         }
     }
+}
+
+void SteerControl::disable() {
+    Serial.println("disable steer");
+    stop = true;
+}
+
+void SteerControl::enable() {
+    Serial.println("enable steer");
+    stop = false;
 }
 
 }  // namespace asn
