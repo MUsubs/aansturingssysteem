@@ -18,7 +18,7 @@ void SteerControl::PID() {
     float gyro_z = mpu.getCurrent_z();
     float current_z = highPassFilter( gyro_z, previous_z );
     kalman();
-
+    
     error = setpoint - current_z;
     error_sum += error * dt;
     error_div = ( error - error_prev ) / dt;
