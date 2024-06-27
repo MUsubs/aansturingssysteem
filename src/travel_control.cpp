@@ -79,13 +79,13 @@ void TravelControl::main() {
                 if ( dest_x == cur_x && dest_z == cur_z ) {
                     // Serial.println("height time");
                     steerControl.disable();
-                    if ( cur_y < dest_y ) {
-                        motorControl.move( motorControl.direction_t::UP );
-                    } else if ( cur_y > dest_y ) {
-                        motorControl.move( motorControl.direction_t::DOWN );
-                    } else {
-                        motorControl.move( motorControl.direction_t::STOP );
-                    }
+                    // if ( cur_y < dest_y ) {
+                    //     motorControl.move( motorControl.direction_t::UP );
+                    // } else if ( cur_y > dest_y ) {
+                    //     motorControl.move( motorControl.direction_t::DOWN );
+                    // } else {
+                    //     motorControl.move( motorControl.direction_t::STOP );
+                    // }
                 // not arrived, prev same as z. Stuck?
                 } else if ( prev_x == cur_x && prev_z == cur_z ) {
                     //stop steering when going backwards.

@@ -41,8 +41,8 @@ void SteerControl::PID() {
         Serial.println( "FORWARD" );
         motorControl.move( motorControl.direction_t::FORWARD );
         vTaskDelay( wait_time );
+        motorControl.move( motorControl.direction_t::STOP );
     }
-    motorControl.move( motorControl.direction_t::STOP );
 }
 
 void SteerControl::kalman() {
@@ -77,6 +77,7 @@ void SteerControl::main() {
 void SteerControl::disable() {
     Serial.println("disable steer");
     stop = true;
+    motorControl.move( motorControl.direction_t::STOP );
 }
 
 void SteerControl::enable() {
