@@ -54,6 +54,7 @@ void setup() {
     vTaskDelay( 5000 );
 
     Serial.println( "Creating tasks..." );
+    
     auto return_motor = xTaskCreate(
         motorControlTask, "MotorControl task", 2048, (void*)&motor_control, 1, &motor_control_task_handle );
     auto return_steer = xTaskCreate(

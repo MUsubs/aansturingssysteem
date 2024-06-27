@@ -24,11 +24,7 @@ void DummyControl::main() {
     // travelControl.updateCurPos(1.0, 1.0, 1.0);
     // vTaskDelay(1000);
     // travelControl.stop();
-
-    // travelControl.updateCurPos( 0.4, 0.1, 0.5);
-    // vTaskDelay( 1000);
-    // travelControl.updateCurPos( 0.7, 0.1, 0.7);
-    // }
+    // travelControl.stop();
 }
 
 }  // namespace asn
