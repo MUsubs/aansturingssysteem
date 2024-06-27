@@ -55,7 +55,7 @@ void setup() {
     auto return_motor = xTaskCreate( motorControlTask, "MotorControl task", 2048, (void*)&motor_control, 1, &motor_control_task_handle );
     auto return_steer = xTaskCreate( steerControlTask, "SteerControl task", 2048, (void*)&steer_control, 1, &steer_control_task_handle );
     auto return_travel = xTaskCreate(travelControlTask, "TravelControl task", 2048, (void*)&travel_control, 1, &travel_control_task_handle);
-    auto return_dummy = xTaskCreate( dummyControlTask, "DummyControl task", 2048, (void*)&dummy_control, 2, &dummy_control_task_handle );
+    auto return_dummy = xTaskCreate( dummyControlTask, "DummyControl task", 2048, (void*)&dummy_control, 1, &dummy_control_task_handle );
 }
 
 void loop() {
