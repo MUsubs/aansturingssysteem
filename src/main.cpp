@@ -16,7 +16,7 @@ xTaskHandle dummy_control_task_handle;
 static uint8_t motor_pins[7] = { 22, 21, 20, 19, 18, 12, 13 };
 static uint8_t button_pins[4] = { 16, 17, 26, 27 };
 Kalman kalmanFilter;
-MPU6050 gyro( Wire );
+Adafruit_MPU6050 gyro;
 asn::Mpu6050 mpu( gyro );
 asn::MotorControl motor_control( motor_pins );
 asn::SteerControl steer_control( mpu, motor_control, kalmanFilter );
@@ -48,44 +48,20 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin( 115200 );
     Wire.begin();
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
     steer_control.setUpSteerControl();
 
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
     auto return_motor = xTaskCreate(
         motorControlTask, "MotorControl task", 2048, (void*)&motor_control, 1, &motor_control_task_handle );
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
 
     auto return_steer = xTaskCreate(
         steerControlTask, "SteerControl task", 2048, (void*)&steer_control, 1, &steer_control_task_handle );
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
 
     auto return_travel = xTaskCreate(
         travelControlTask, "TravelControl task", 2048, (void*)&travel_control, 1,
         &travel_control_task_handle );
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
 
     auto return_dummy = xTaskCreate(
         dummyControlTask, "DummyControl task", 2048, (void*)&dummy_control, 2, &dummy_control_task_handle );
-    digitalWrite(LED_BUILTIN, HIGH);
-    vTaskDelay(3000);
-    digitalWrite(LED_BUILTIN, LOW);
-    vTaskDelay(1000);
 }
 
 void loop() {
