@@ -24,11 +24,16 @@ void DummyControl::main() {
     // travelControl.updateCurPos(1.0, 1.0, 1.0);
     // vTaskDelay(1000);
     // travelControl.stop();
-
-    // travelControl.updateCurPos( 0.4, 0.1, 0.5);
-    // vTaskDelay( 1000);
-    // travelControl.updateCurPos( 0.7, 0.1, 0.7);
-    // }
+    travelControl.updateCurPos( 0.4, 0.1, 0.5);
+    vTaskDelay( 1000 );
+    travelControl.updateCurPos( 0.7, 0.1, 0.7);
+    vTaskDelay( 1000 );
+    // travelControl.updateCurPos( 1.0, 0.1, 1.0);
+    // vTaskDelay( 1000 );
+    // travelControl.updateCurPos( 1.0, 0.3, 1.0);
+    // vTaskDelay(1000);
+    // travelControl.updateCurPos( 1.0, 1.0, 1.0);
+    travelControl.stop();
 
 }
 
