@@ -45,26 +45,52 @@ void dummyControlTask( void* pvParameters ) {
 }
 
 void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin( 115200 );
     Wire.begin();
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
     steer_control.setUpSteerControl();
 
-    Serial.println( "AFKLSMDGBOLMDFZN" );
-
-    vTaskDelay( 5000 );
-
-    Serial.println( "Creating tasks..." );
-    
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
     auto return_motor = xTaskCreate(
         motorControlTask, "MotorControl task", 2048, (void*)&motor_control, 1, &motor_control_task_handle );
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
+
     auto return_steer = xTaskCreate(
         steerControlTask, "SteerControl task", 2048, (void*)&steer_control, 1, &steer_control_task_handle );
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
+
     auto return_travel = xTaskCreate(
         travelControlTask, "TravelControl task", 2048, (void*)&travel_control, 1,
         &travel_control_task_handle );
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
+
     auto return_dummy = xTaskCreate(
         dummyControlTask, "DummyControl task", 2048, (void*)&dummy_control, 2, &dummy_control_task_handle );
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(3000);
+    digitalWrite(LED_BUILTIN, LOW);
+    vTaskDelay(1000);
 }
 
 void loop() {
+    vTaskDelay(500);
+    digitalWrite(LED_BUILTIN, HIGH);
+    vTaskDelay(500);
+    digitalWrite(LED_BUILTIN, LOW);
 }
