@@ -13,8 +13,7 @@ xTaskHandle steer_control_task_handle;
 xTaskHandle travel_control_task_handle;
 xTaskHandle dummy_control_task_handle;
 
-static uint8_t motor_pins[7] = { 22, 21, 20, 19, 18, 12, 13 };
-static uint8_t button_pins[4] = { 16, 17, 26, 27 };
+static uint8_t motor_pins[7] = { 18 /*EEP*/, 17 /*speed*/, 16 /*speed*/, 14 /*depth*/, 15 /*depth*/, 13 /*steer*/, 12 /*steer*/ };
 Kalman kalmanFilter;
 MPU6050 gyro( Wire );
 asn::Mpu6050 mpu( gyro );

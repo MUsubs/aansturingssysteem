@@ -8,11 +8,11 @@ namespace asn {
 
 class DummyControl {
 public:
-    DummyControl( TravelControl& travelControl );
+    DummyControl( TravelControl& travel_control );
     void main();
 
 private:
-    TravelControl& travelControl;
+    TravelControl& travel_control;
 };
 
 }  // namespace asn
