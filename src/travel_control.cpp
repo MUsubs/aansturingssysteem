@@ -9,6 +9,14 @@ TravelControl::TravelControl( MotorControl &motorControl, SteerControl &steerCon
 }
 
 void TravelControl::calculateRotation( const float cur_x, const float cur_z ) {
+    float v1x = cur_x - prev_x;
+    float v1z = cur_z - prev_z;
+    float v2x = dest_x - cur_x;
+    float v2z = dest_z - cur_z;
+
+// Calculate cross product
+    float cross_product = v1x * v2z - v1z * v2x;
+
     float angle = acos(
         ( ( ( cur_x - prev_x ) * ( dest_x - cur_x ) ) + ( ( cur_z - prev_z ) * ( dest_z - cur_z ) ) ) /
         ( sqrt( pow( ( cur_x - prev_x ), 2 ) + pow( ( cur_z - prev_z ), 2 ) ) *

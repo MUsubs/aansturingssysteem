@@ -29,12 +29,13 @@ void SteerControl::PID() {
     previous_z = current_z;
     Serial.printf( "Measured angle : %f \n", gyro_z);
     Serial.printf( "Steer action: %f\n", steer_action );
+    Serial.printf( "Error: %f\n", error );
 
-    if ( round( gyro_z +5) < steer_action ) {
+    if ( round( gyro_z + 5) < steer_action ) {
         Serial.println( "LEFT" );
         motorControl.move( motorControl.direction_t::LEFT );
         vTaskDelay( wait_time );
-    } else if ( round( gyro_z -5) > steer_action ) {
+    } else if ( round( gyro_z - 5) > steer_action ) {
         Serial.println( "RIGHT" );
         motorControl.move( motorControl.direction_t::RIGHT );
         vTaskDelay( wait_time );
