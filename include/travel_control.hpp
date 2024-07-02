@@ -24,12 +24,25 @@ public:
      * @param cur_z The current z-coordinate of the submarine.
      */
     void calculateRotation( const float cur_x, const float cur_z );
+    
     /**
-     * @brief Stops the submarine.
+     * @brief Sets stop bool.
      */
     void stop();
+
+    /**
+     * @brief Writes destination coordinates to destination queue.
+     */
     void newDest( const float dest_x, const float dest_y, const float dest_z );
+
+    /**
+     * @brief Writes current coordinates to current position queue.
+     */
     void updateCurPos( const float cur_x, const float cur_y, const float cur_z );
+
+    /**
+     * @brief Main for multithreading task.
+     */
     void main();
 
 private:

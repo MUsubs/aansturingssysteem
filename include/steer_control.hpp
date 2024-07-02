@@ -28,9 +28,20 @@ namespace asn
          * @brief Initializes SteerControl and Kalman variables and starts the setup for the mpu6050.
          */
         void setUpSteerControl();
+
+        /**
+         * @brief Main for multithreading task.
+         */
         void main();
         
+        /**
+         * @brief Disables steering and stops motors.
+         */
         void disable();
+
+        /**
+         * @brief Enables steering.
+         */
         void enable();
 
     private:
