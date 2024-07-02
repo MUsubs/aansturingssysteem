@@ -114,9 +114,9 @@ void TravelControl::main() {
                 dest_x = new_dest[0];
                 dest_y = new_dest[1];
                 dest_z = new_dest[2];
-                motorControl.move( motorControl.direction_t::FORWARD );
-                vTaskDelay( 100 );
-                motorControl.move( motorControl.direction_t::STOP );
+                // motorControl.move( motorControl.direction_t::FORWARD );
+                // vTaskDelay( 100 );
+                // motorControl.move( motorControl.direction_t::STOP );
                 steerControl.enable();
 
                 travel_state = read;

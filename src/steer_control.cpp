@@ -39,8 +39,8 @@ void SteerControl::PID() {
         vTaskDelay( wait_time );
     } else {
         Serial.println( "FORWARD" );
-        motorControl.move( motorControl.direction_t::FORWARD );
-        vTaskDelay( wait_time );
+        // motorControl.move( motorControl.direction_t::FORWARD );
+        // vTaskDelay( wait_time );
         motorControl.move( motorControl.direction_t::STOP );
     }
 }
