@@ -1,32 +1,19 @@
 #include <Arduino.h>
-#include <FreeRTOS.h>
+#include <freeRTOS.h>
 
-#include "dummyControl.hpp"
 #include "motor.hpp"
 #include "motor_control.hpp"
-#include "mpu6050.hpp"
-#include "steer_control.hpp"
-#include "travel_control.hpp"
+
+static uint8_t motor_pins[7] = { 22, 18, 19, 20, 21, 16, 17 };
+static uint8_t button_pins[4] = { 10, 11, 12, 13 };
+asn::MotorControl motor_control( motor_pins );
 
 xTaskHandle motor_control_task_handle;
-xTaskHandle steer_control_task_handle;
-xTaskHandle travel_control_task_handle;
-xTaskHandle dummy_control_task_handle;
 
-static uint8_t motor_pins[7] = { 18 /*EEP*/,
-                                 17 /*speed*/,
-                                 16 /*speed*/,
-                                 14 /*depth*/,
-                                 15 /*depth*/,
-                                 13 /*steer*/,
-                                 12 /*steer*/ };
-Kalman kalmanFilter;
-MPU6050 gyro( Wire );
-asn::Mpu6050 mpu( gyro );
-asn::MotorControl motor_control( motor_pins );
-asn::SteerControl steer_control( mpu, motor_control, kalmanFilter );
-asn::TravelControl travel_control( motor_control, steer_control );
-asn::DummyControl dummy_control( travel_control );
+bool forward;
+bool backward;
+bool left;
+bool right;
 
 void motorControlTask( void* pvParameters ) {
     asn::MotorControl* mc =
@@ -34,62 +21,61 @@ void motorControlTask( void* pvParameters ) {
     mc->main();
 }
 
-void steerControlTask( void* pvParameters ) {
-    asn::SteerControl* sc =
-        reinterpret_cast<asn::SteerControl*>( pvParameters );
-    sc->main();
-}
-
-void travelControlTask( void* pvParameters ) {
-    asn::TravelControl* tc =
-        reinterpret_cast<asn::TravelControl*>( pvParameters );
-    tc->main();
-}
-
-void dummyControlTask( void* pvParameters ) {
-    asn::DummyControl* dc =
-        reinterpret_cast<asn::DummyControl*>( pvParameters );
-    dc->main();
-    vTaskDelete( dummy_control_task_handle );
-}
-
 void setup() {
-    pinMode( LED_BUILTIN, OUTPUT );
+    // motor(driver) pins voor motor
     Serial.begin( 115200 );
-    Wire.begin();
+    vTaskDelay( 2000 );
 
-    delay( 2000 );
+    forward = false;
+    backward = false;
+    left = false;
+    right = false;
 
-    Serial.println( "ASDLKFJHASLKDJFHSDAV" );
+    for ( auto button_pin : button_pins ) {
+        pinMode( button_pin, INPUT );
+    }
 
-    steer_control.setUpSteerControl();
+    auto return_motor = xTaskCreate( motorControlTask, "MotorControl task", 2048, (void*)&motor_control, 1, &motor_control_task_handle );
 
-    //wait for setup, if motor on, 5 seconds to put in water.
-    delay( 100 );
-    digitalWrite( LED_BUILTIN, HIGH);
-    Serial.println( "water time" ); 
-    delay( 5000 );
-    digitalWrite( LED_BUILTIN, LOW);
+    if ( return_motor !- ) {
 
-    Serial.println( "ASDLKFJHASLKDJFHSDAV" );
-
-    auto return_motor =
-        xTaskCreate( motorControlTask, "MotorControl task", 2048,
-                     (void*)&motor_control, 1, &motor_control_task_handle );
-
-    auto return_steer =
-        xTaskCreate( steerControlTask, "SteerControl task", 2048,
-                     (void*)&steer_control, 1, &steer_control_task_handle );
-
-    auto return_travel =
-        xTaskCreate( travelControlTask, "TravelControl task", 2048,
-                     (void*)&travel_control, 1, &travel_control_task_handle );
-
-    auto return_dummy =
-        xTaskCreate( dummyControlTask, "DummyControl task", 2048,
-                     (void*)&dummy_control, 2, &dummy_control_task_handle );
+    }
 }
 
 void loop() {
-    taskYIELD();
+    if ( digitalRead( button_pins[0] ) ) {
+        forward != forward;
+        backward = false;
+    }
+    if ( digitalRead( button_pins[1] ) ) {
+        backward != backward;
+        forward = false;
+    }
+    if ( digitalRead( button_pins[2] ) ) {
+        left != left;
+        right = false;
+    }
+    if ( digitalRead( button_pins[3] ) ) {
+        right != right;
+        right = false;
+    }
+
+    // stop all
+    motor_control.move( motor_control.direction_t::STOP );
+    // start (again) if on
+    // speed motor
+    if ( forward ) {
+        motor_control.move( motor_control.direction_t::FORWARD );
+    } else if ( backward ) {
+        motor_control.move( motor_control.direction_t::BACKWARD );
+    }
+
+    // steer motor
+    if ( right ) {
+        motor_control.move( motor_control.direction_t::RIGHT );
+    } else if ( left ) {
+        motor_control.move( motor_control.direction_t::LEFT );
+    }
+
+    vTaskDelay( 100 );
 }
